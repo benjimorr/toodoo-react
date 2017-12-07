@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import TodoListGroupReducer from './todo_list_group';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  todoListGroup: TodoListGroupReducer
 });
 
 export default rootReducer;
