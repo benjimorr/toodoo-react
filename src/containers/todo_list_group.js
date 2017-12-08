@@ -5,19 +5,41 @@ import { bindActionCreators } from 'redux';
 import { fetchTodoLists } from '../actions/index';
 
 class TodoListGroup extends Component {
-    componentDidMount() {
+    componentWillMount() {
         this.props.fetchTodoLists();
     }
 
-    render() {
+    renderTodoLists(todoData) {
+        const id = todoData.id;
+        const title = todoData.title;
+        const category = todoData.category;
+
         return (
-            <div>Hello</div>
+            <li key={id}>
+                <h3>{title}</h3>
+                <p>{category}</p>
+            </li>
+        );
+    }
+
+    render() {
+        console.log(this.props.todoListGroup);
+        return (
+            <div>
+                <ul>
+                    {this.props.todoListGroup.map(this.renderTodoLists)}
+                </ul>
+            </div>
         );
     }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchTodoLists }, dispatch);
+function mapStateToProps({ todoListGroup }) {
+    return { todoListGroup };
 }
 
-export default connect(null, mapDispatchToProps)(TodoListGroup);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ fetchTodoLists }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListGroup);
