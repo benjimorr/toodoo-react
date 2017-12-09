@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { fetchTodoLists } from '../actions/index';
-import TodoListGroup from '../components/todo_list_group';
+import TodoListGroup from './todo_list_group';
+import ActiveTodo from './active_todo';
 
 class App extends Component {
     componentWillMount() {
@@ -12,8 +13,13 @@ class App extends Component {
 
     render() {
         return (
-            <div className="col-md-3">
-                <TodoListGroup todoLists={this.props.todoListGroup} />
+            <div className="col-md-12">
+                <div className="col-md-4 todo-list-group">
+                    <TodoListGroup todoLists={this.props.todoListGroup} />
+                </div>
+                <div className="col-md-8 single-todo-list">
+                    <ActiveTodo />
+                </div>
             </div>
         );
     }

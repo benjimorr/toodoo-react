@@ -1,7 +1,28 @@
+*, ::after, ::before {
+    box-sizing: border-box !important;
+}
+
 .list-group-item {
     cursor: pointer;
 }
 
 .list-group-item:hover {
     background-color: #ddd;
+}
+
+.todo-list-group,
+.single-todo-list {
+    padding: 1.5rem;
+}
+
+.todo-list {
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.todo-list-title,
+.todo-list-cat {
+    position: relative;
+    text-align: center;
 }
