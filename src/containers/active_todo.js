@@ -8,8 +8,8 @@ class ActiveTodo extends Component {
     render() {
         if(this.props.singleTodoList) {
             return (
-                <div>
-                    <h2 className="todo-list-title">{this.props.singleTodoList.title}</h2>
+                <div className="active-todo-list">
+                    <h1 className="todo-list-title">{this.props.singleTodoList.title}</h1>
 
                     <TodoItems todoId={this.props.singleTodoList.todo_id} items={this.props.singleTodoList.items} />
                 </div>

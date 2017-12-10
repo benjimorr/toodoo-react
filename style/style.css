@@ -26,3 +26,25 @@
     position: relative;
     text-align: center;
 }
+
+.active-todo-list {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.todo-list-items {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.incomplete-items,
+.complete-items {
+    position: relative;
+    padding: 1rem 2rem;
+}
+
+.no-todo-items {
+    text-align: center;
+    font-size: 1.2rem;
+}

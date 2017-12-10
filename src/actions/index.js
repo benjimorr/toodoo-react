@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTI4Njk3Njd9.eM2aqcrwMArCWAoLOdu9hQVOa34rRgwRhJdCKTn3fVA";
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTMwMTM3MDV9.FLpRPTdrvDNi-KPCrI5tn54nbechOLZULO2VIJKlmP8";
 const ROOT_URL = "https://my-toodoo-api.herokuapp.com";
 
 export const FETCH_TODO_LISTS = "FETCH_TODO_LISTS";
@@ -13,6 +13,9 @@ export function fetchTodoLists() {
             'Content-Type': 'application/json',
             'Authorization': AUTH_TOKEN
         }
+    })
+    .catch(function (error) {
+        console.log(error);
     });
 
     return {
@@ -28,6 +31,9 @@ export function fetchSingleTodoList(id) {
             'Content-Type': 'application/json',
             'Authorization': AUTH_TOKEN
         }
+    })
+    .catch(function (error) {
+        console.log(error);
     });
 
     return {

@@ -1,7 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class TodoItems extends Component {
-    render() {
-        return <div>Items</div>;
-    }
+import TodoItemTable from './todo_item_table';
+
+export default (props) => {
+    const incompleteItems = props.items.filter((item) => item.complete === false);
+    const completeItems = props.items.filter((item) => item.complete === true);
+
+    return (
+        <div className="todo-list-items">
+            <h3>Items:</h3>
+
+            <div className="incomplete-items">
+                <h4>Incomplete:</h4>
+                <TodoItemTable todoId={props.todoId} items={incompleteItems} />
+            </div>
+
+            <div className="complete-items">
+                <h4>Complete:</h4>
+                <TodoItemTable todoId={props.todoId} items={completeItems} />
+            </div>
+        </div>
+    );
 }
