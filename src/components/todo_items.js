@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TodoItemTable from './todo_item_table';
+import TodoItemTable from '../containers/todo_item_table';
 
 export default (props) => {
     const incompleteItems = props.items.filter((item) => item.complete === false);

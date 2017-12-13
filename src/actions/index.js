@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTMwMTM3MDV9.FLpRPTdrvDNi-KPCrI5tn54nbechOLZULO2VIJKlmP8";
-const ROOT_URL = "https://my-toodoo-api.herokuapp.com";
+export const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTMyMDY5Nzh9.crU81cyAN7Rnoo_l3BYz_qBT-ULIajoel6BuzyexA6c";
+export const ROOT_URL = "https://my-toodoo-api.herokuapp.com";
 
 export const FETCH_TODO_LISTS = "FETCH_TODO_LISTS";
 export const FETCH_SINGLE_LIST = "FETCH_SINGLE_LIST";
