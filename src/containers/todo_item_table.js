@@ -11,11 +11,11 @@ class TodoItemTable extends Component {
         super(props);
 
         this.renderItem = this.renderItem.bind(this);
-        this.completeItem = this.completeItem.bind(this);
+        this.completeOrUndoItem = this.completeOrUndoItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
     }
 
-    completeItem(id) {
+    completeOrUndoItem(id, value) {
         const props = this.props;
 
         const request = axios({
@@ -26,7 +26,7 @@ class TodoItemTable extends Component {
                 'Authorization': AUTH_TOKEN
             },
             data: {
-                complete: true
+                complete: value
             }
         })
         .then(function(response) {
@@ -61,33 +61,31 @@ class TodoItemTable extends Component {
         const name = itemData.name;
         const createdAt = moment(itemData.created_at).fromNow();
 
+        let complete = null;
         if(itemData.complete) {
-            return (
-                <tr key={id}>
-                    <td>{name}</td>
-                    <td>{createdAt}</td>
-                    <td>Yes</td>
-                    <td>N/A</td>
-                </tr>
-            );
+            complete = <div>
+                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, false, e)} className="btn btn-primary">Undo</button>
+                        </div>
         } else {
-            return (
-                <tr key={id}>
-                    <td>{name}</td>
-                    <td>{createdAt}</td>
-                    <td>
-                        <div>
-                            <button type="submit" onClick={(e) => this.completeItem(id, e)} className="btn btn-success">&#10003;</button>
+            complete = <div>
+                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, true, e)} className="btn btn-success">&#10003;</button>
                         </div>
-                    </td>
-                    <td>
-                        <div>
-                            <button type="submit" onClick={(e) => this.deleteItem(id, e)} className="btn btn-danger">X</button>
-                        </div>
-                    </td>
-                </tr>
-            );
         }
+
+        return (
+            <tr key={id}>
+                <td>{name}</td>
+                <td>{createdAt}</td>
+                <td>
+                    {complete}
+                </td>
+                <td>
+                    <div>
+                        <button type="submit" onClick={(e) => this.deleteItem(id, e)} className="btn btn-danger">X</button>
+                    </div>
+                </td>
+            </tr>
+        );
     }
 
     render() {
