@@ -2,12 +2,30 @@
     box-sizing: border-box !important;
 }
 
+html {
+    font-size: 16px !important;
+}
+
 .list-group-item {
     cursor: pointer;
 }
 
 .list-group-item:hover {
     background-color: #ddd;
+}
+
+.app-container {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.toodoo-logo-text {
+    font-weight: 300;
+    text-align: center;
+}
+
+.todo-list-group-title {
+    font-weight: 300;
 }
 
 .todo-list-group,
@@ -31,6 +49,17 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 1rem;
+}
+
+.new-item-name {
+    position: relative;
+    width: 80%;
+    margin: 1rem auto 0 auto;
+}
+
+.new-todo-item-desc {
+    position: relative;
+    text-align: center;
 }
 
 .todo-list-items {

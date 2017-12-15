@@ -13,12 +13,20 @@ class App extends Component {
 
     render() {
         return (
-            <div className="col-md-12">
-                <div className="col-md-4 todo-list-group">
-                    <TodoListGroup todoLists={this.props.todoListGroup} />
+            <div className="app-container">
+                <div className="col-md-12">
+                    <div className="col-md-4 toodoo-logo">
+                        <h1 className="toodoo-logo-text">TooDoo</h1>
+                    </div>
                 </div>
-                <div className="col-md-8 single-todo-list">
-                    <ActiveTodo />
+                <div className="col-md-12">
+                    <div className="col-md-4 todo-list-group">
+                        <h3 className="todo-list-group-title">Your Todo Lists:</h3>
+                        <TodoListGroup todoLists={this.props.todoListGroup} />
+                    </div>
+                    <div className="col-md-8 single-todo-list">
+                        <ActiveTodo />
+                    </div>
                 </div>
             </div>
         );

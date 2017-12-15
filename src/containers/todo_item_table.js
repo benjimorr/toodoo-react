@@ -15,6 +15,12 @@ class TodoItemTable extends Component {
         this.deleteItem = this.deleteItem.bind(this);
     }
 
+    /*
+    * @name: completeOrUndoItem
+    * @desc: Will either complete or un-complete a todo list item, depending on the Boolean value of the value parameter.
+    *       Fires off a re-render of the whole active todo item container by calling the API to fetch the current todo list.
+    * @returns: Promise
+    */
     completeOrUndoItem(id, value) {
         const props = this.props;
 
@@ -37,6 +43,11 @@ class TodoItemTable extends Component {
         });
     }
 
+    /*
+    * @name: deleteItem
+    * @desc: Makes a delete request to the API based on the id that is passed
+    * @returns: Promise
+    */
     deleteItem(id) {
         const props = this.props;
 
@@ -64,11 +75,11 @@ class TodoItemTable extends Component {
         let complete = null;
         if(itemData.complete) {
             complete = <div>
-                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, false, e)} className="btn btn-primary">Undo</button>
+                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, false, e)} className="btn btn-primary"><i className="glyphicon glyphicon-repeat"></i></button>
                         </div>
         } else {
             complete = <div>
-                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, true, e)} className="btn btn-success">&#10003;</button>
+                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, true, e)} className="btn btn-success"><i className="glyphicon glyphicon-ok"></i></button>
                         </div>
         }
 
@@ -81,7 +92,7 @@ class TodoItemTable extends Component {
                 </td>
                 <td>
                     <div>
-                        <button type="submit" onClick={(e) => this.deleteItem(id, e)} className="btn btn-danger">X</button>
+                        <button type="submit" onClick={(e) => this.deleteItem(id, e)} className="btn btn-danger"><i className="glyphicon glyphicon-trash"></i></button>
                     </div>
                 </td>
             </tr>
