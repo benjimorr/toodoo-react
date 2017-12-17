@@ -52,16 +52,21 @@ class ActiveTodo extends Component {
 
                     <form onSubmit={this.createItem} className="input-group new-item-name">
                         <input
+                            type="text"
+                            name="itemname"
                             placeholder="Add item to list..."
                             className="form-control"
                             value={this.state.name}
                             onChange={this.onInputChange}
+                            pattern="[A-Za-z\s]{5,}"
+                            required
+                            title="Please enter at least 5 letters"
                         />
                         <span className="input-group-btn">
                             <button type="submit" className="btn btn-secondary">Add</button>
                         </span>
                     </form>
-                    <p className="new-todo-item-desc">(Todo list items will be automatically removed after 7 days)</p>
+                    <p className="new-todo-item-desc">(Items must be at least 5 letters and will be auto-completed after 7 days)</p>
 
                     <TodoItems todoId={this.props.singleTodoList.todo_id} items={this.props.singleTodoList.items} />
                 </div>
