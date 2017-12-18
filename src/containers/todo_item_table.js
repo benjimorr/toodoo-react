@@ -52,24 +52,27 @@ class TodoItemTable extends Component {
     * @returns: Promise
     */
     deleteItem(id) {
-        const props = this.props;
+        let conf = confirm("Are you sure you want to delete this list?");
+        if(conf) {
+            const props = this.props;
 
-        const request = axios({
-            method: 'delete',
-            url: ROOT_URL + `/todos/${this.props.todoId}/items/${id}`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': AUTH_TOKEN
-            }
-        })
-        .then(function(response) {
-            props.fetchSingleTodoList(props.todoId);
-            NotificationManager.info(response.data.message);
-        })
-        .catch(function(err) {
-            console.log(err.message);
-            NotificationManager.error("There was an unexpected error. Please try again.");
-        });
+            const request = axios({
+                method: 'delete',
+                url: ROOT_URL + `/todos/${this.props.todoId}/items/${id}`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': AUTH_TOKEN
+                }
+            })
+            .then(function(response) {
+                props.fetchSingleTodoList(props.todoId);
+                NotificationManager.info(response.data.message);
+            })
+            .catch(function(err) {
+                console.log(err.message);
+                NotificationManager.error("There was an unexpected error. Please try again.");
+            });
+        }
     }
 
     renderItem(itemData) {
@@ -109,7 +112,7 @@ class TodoItemTable extends Component {
             return <div className="no-todo-items">No items here!</div>;
         } else {
             return (
-                <table className="table table-hover">
+                <table className="table table-hover todo-item-table">
                     <thead>
                         <tr>
                             <th>Name</th>

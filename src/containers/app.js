@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { NotificationContainer } from 'react-notifications';
 
 import { fetchTodoLists } from '../actions/index';
+import NewTodoList from './new_todo_list';
 import TodoListGroup from './todo_list_group';
 import ActiveTodo from './active_todo';
 
@@ -19,6 +20,9 @@ class App extends Component {
                 <div className="col-md-4 side-bar">
                     <div className="col-md-10 toodoo-logo">
                         <h1 className="toodoo-logo-text">TooDoo</h1>
+                    </div>
+                    <div className="col-md-10 create-todo-list">
+                        <NewTodoList />
                     </div>
                     <div className="col-md-10 todo-list-group">
                         <h3 className="todo-list-group-title">Your Todo Lists:</h3>

@@ -19,13 +19,15 @@ html {
     margin-top: 2rem;
 }
 
-.side-bar {
-    position: fixed !important;
-}
+@media(min-width: 985px) {
+    .side-bar {
+        position: fixed !important;
+    }
 
-.main-view {
-    position: absolute !important;
-    right: 0;
+    .main-view {
+        position: absolute !important;
+        right: 0;
+    }
 }
 
 .toodoo-logo-text {
@@ -37,7 +39,8 @@ html {
     text-align: center;
 }
 
-.todo-list-group-title {
+.todo-list-group-title,
+.new-todo-list-title {
     font-weight: 300;
 }
 
@@ -46,10 +49,41 @@ html {
     padding: 1.5rem;
 }
 
+@media(min-width: 1500px) {
+    .todo-list-group,
+    .create-todo-list,
+    .toodoo-logo {
+        max-width: 380px;
+    }
+}
+
+.new-todo-list-btn {
+    position: relative;
+    width: 100%;
+}
+
+.todo-lists-list {
+    max-height: 350px;
+    overflow: auto;
+}
+
 .todo-list {
     position: relative;
+    display: inline-block;
+    padding-left: 1rem;
     width: 70%;
-    margin: 0 auto;
+}
+
+.delete-todo-list {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+}
+
+.delete-list-btn {
+    position: relative;
+    top: -1rem;
 }
 
 .todo-list-title,
@@ -78,6 +112,10 @@ html {
 .todo-list-items {
     position: relative;
     margin-top: 2rem;
+}
+
+.todo-item-table {
+    overflow: auto;
 }
 
 .incomplete-items,
