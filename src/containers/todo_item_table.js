@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
+import { NotificationManager } from 'react-notifications';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -37,9 +38,11 @@ class TodoItemTable extends Component {
         })
         .then(function(response) {
             props.fetchSingleTodoList(props.todoId);
+            NotificationManager.success(response.data.message, 'Success');
         })
         .catch(function(err) {
-            console.log(err);
+            console.log(err.message);
+            NotificationManager.error("There was an unexpected error. Please try again.");
         });
     }
 
@@ -61,9 +64,11 @@ class TodoItemTable extends Component {
         })
         .then(function(response) {
             props.fetchSingleTodoList(props.todoId);
+            NotificationManager.info(response.data.message);
         })
         .catch(function(err) {
-            console.log(err);
+            console.log(err.message);
+            NotificationManager.error("There was an unexpected error. Please try again.");
         });
     }
 

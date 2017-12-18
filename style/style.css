@@ -19,8 +19,21 @@ html {
     margin-top: 2rem;
 }
 
+.side-bar {
+    position: fixed !important;
+}
+
+.main-view {
+    position: absolute !important;
+    right: 0;
+}
+
 .toodoo-logo-text {
+    font-family: cursive;
     font-weight: 300;
+    color: #e6add8;
+    text-shadow: 2px 2px black;
+    font-size: 3rem;
     text-align: center;
 }
 

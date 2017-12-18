@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { NotificationManager } from 'react-notifications';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -36,9 +37,11 @@ class ActiveTodo extends Component {
         })
         .then(function(response) {
             props.fetchSingleTodoList(props.singleTodoList.todo_id);
+            NotificationManager.success(response.data.message, 'Success');
         })
         .catch(function(err) {
-            console.log(err);
+            console.log(err.message);
+            NotificationManager.error("There was an unexpected error. Please try again.");
         });
 
         this.setState({ name: "" });
