@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MTM2MzU3NzJ9.vbkjzyq_9EWu7A1AjB-vUWThovca1xL6pzcXBkWbOAc";
+export const AUTH_TOKEN = "";
 export const ROOT_URL = "https://my-toodoo-api.herokuapp.com";
 
 export const FETCH_TODO_LISTS = "FETCH_TODO_LISTS";

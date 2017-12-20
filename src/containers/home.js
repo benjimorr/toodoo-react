@@ -8,7 +8,7 @@ import NewTodoList from './new_todo_list';
 import TodoListGroup from './todo_list_group';
 import ActiveTodo from './active_todo';
 
-class App extends Component {
+class Home extends Component {
     componentWillMount() {
         this.props.fetchTodoLists();
     }
@@ -47,4 +47,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ fetchTodoLists }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
