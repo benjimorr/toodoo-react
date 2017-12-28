@@ -8,7 +8,7 @@ html {
 
 .auth-main {
     position: relative;
-    width: 70%;
+    width: 80%;
     top: 8rem;
     margin: auto;
 }
@@ -32,12 +32,19 @@ html {
 .login-button,
 .signup-button {
     cursor: pointer;
-    text-decoration: none;
 }
 
-.main-menu-header {
+.login-form-div,
+.signup-form-div {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+
+.login-header {
     text-align: center;
     margin-top: 0;
+    font-weight: 300;
 }
 
 .list-group-item {
@@ -91,6 +98,8 @@ html {
     }
 }
 
+.login-btn,
+.signup-btn,
 .new-todo-list-btn {
     position: relative;
     width: 100%;

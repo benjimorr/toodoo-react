@@ -61,7 +61,7 @@ class ActiveTodo extends Component {
                             className="form-control"
                             value={this.state.name}
                             onChange={this.onInputChange}
-                            pattern="[A-Za-z\s]{5,}"
+                            pattern="[A-Za-z\s]{5,50}"
                             required
                             title="Please enter at least 5 letters"
                         />

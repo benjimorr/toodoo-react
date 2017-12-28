@@ -71,7 +71,7 @@ class NewTodoList extends Component {
                             className="form-control"
                             value={this.state.title}
                             onChange={this.onTitleChange}
-                            pattern="[A-Za-z\s]{3,}"
+                            pattern="[A-Za-z\s]{3,50}"
                             required
                             title="Please enter at least 3 letters"
                         />
@@ -84,7 +84,7 @@ class NewTodoList extends Component {
                             className="form-control"
                             value={this.state.category}
                             onChange={this.onCategoryChange}
-                            pattern="[A-Za-z\s]{5,}"
+                            pattern="[A-Za-z\s]{5,50}"
                             required
                             title="Please enter at least 5 letters"
                         />

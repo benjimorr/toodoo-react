@@ -12,42 +12,46 @@ class Login extends Component {
         };
 
         this.onEmailChange = this.onEmailChange.bind(this);
-        this.onTitleChange = this.onTitleChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
     }
 
     onEmailChange(event) {
-        this.setState({ title: event.target.value });
+        this.setState({ email: event.target.value });
+    }
+
+    onPasswordChange(event) {
+        this.setState({ password: event.target.value });
     }
 
     render() {
         return (
-            <div>
-                <h3 className="main-menu-header">Login</h3>
+            <div className="login-form-div">
+                <h3 className="login-header">Login</h3>
                 <form>
                     <div className="form-group">
                         <input
-                            type="text"
-                            placeholder="Email Address"
+                            type="email"
+                            placeholder="Email"
                             className="form-control"
                             value={this.state.email}
                             onChange={this.onEmailChange}
-                            pattern="[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}"
                             required
                             title="Please enter a valid email address"
                         />
                     </div>
                     <div className="form-group">
                         <input
-                            type="text"
-                            placeholder="Category (min. 5 letters)"
+                            type="password"
+                            placeholder="Password"
                             className="form-control"
-                            value={this.state.category}
-                            onChange={this.onCategoryChange}
-                            pattern="[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}"
+                            value={this.state.password}
+                            onChange={this.onPasswordChange}
+                            pattern="[A-Za-z\d]{8,}"
                             required
-                            title="Please enter at least 5 letters"
+                            title="Passwords must be at least 8 characters (only letters and numbers)"
                         />
                     </div>
+                    <button type="submit" className="btn btn-secondary login-btn">Login</button>
                 </form>
             </div>
         );
