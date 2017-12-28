@@ -6,6 +6,40 @@ html {
     font-size: 16px !important;
 }
 
+.auth-main {
+    position: relative;
+    width: 70%;
+    top: 8rem;
+    margin: auto;
+}
+
+.login-signup-toggle {
+    position: relative;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.login-signup-show {
+    position: relative;
+    width: 60%;
+    margin: 2rem auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.login-button,
+.signup-button {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.main-menu-header {
+    text-align: center;
+    margin-top: 0;
+}
+
 .list-group-item {
     cursor: pointer;
 }

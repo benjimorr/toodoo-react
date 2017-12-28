@@ -31,15 +31,15 @@ class Authentication extends Component {
 
     render() {
         return (
-            <div className="col-md-12 auth-main">
+            <div className="auth-main">
                 <div className="toodoo-logo">
                     <h1 className="toodoo-logo-text">TooDoo</h1>
                 </div>
 
                 <div className="login-signup-toggle">
                     <a className="login-button" onClick={this.toggleLogin}>Login</a>
-                     or
-                     <a className="signup-button" onClick={this.toggleSignup}>Sign up</a>
+                    &nbsp; or &nbsp;
+                    <a className="signup-button" onClick={this.toggleSignup}>Sign up</a>
                 </div>
 
                 <div className="login-signup-show">
