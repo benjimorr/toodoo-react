@@ -16,7 +16,9 @@ class Home extends Component {
     }
 
     componentWillMount() {
-        this.props.fetchTodoLists();
+        this.props.fetchTodoLists(() => {
+            this.props.history.push('/login');
+        });
     }
 
     endSession() {
@@ -38,16 +40,16 @@ class Home extends Component {
                         <h1 className="toodoo-logo-text">TooDoo</h1>
                     </div>
                     <div className="col-md-10 create-todo-list">
-                        <NewTodoList />
+                        <NewTodoList history={this.props.history} />
                     </div>
                     <div className="col-md-10 todo-list-group">
                         <h3 className="todo-list-group-title">Your Todo Lists:</h3>
-                        <TodoListGroup todoLists={this.props.todoListGroup} />
+                        <TodoListGroup todoLists={this.props.todoListGroup} history={this.props.history} />
                     </div>
                 </div>
                 <div className="col-md-8 main-view">
                     <div className="col-md-12 single-todo-list">
-                        <ActiveTodo />
+                        <ActiveTodo history={this.props.history} />
                     </div>
                 </div>
             </div>

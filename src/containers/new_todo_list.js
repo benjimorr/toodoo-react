@@ -44,7 +44,9 @@ class NewTodoList extends Component {
             }
         })
         .then(function(response) {
-            props.fetchTodoLists();
+            props.fetchTodoLists(() => {
+                this.props.history.push('/login');
+            });
             NotificationManager.success(response.data.message, 'Success');
         })
         .catch(function(err) {

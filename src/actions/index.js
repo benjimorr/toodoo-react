@@ -43,7 +43,11 @@ export function signup(values, callback) {
             callback();
         })
         .catch(function(err) {
-            NotificationManager.error("Something went wrong. Please try again.");
+            if(err.response.data.errors.email) {
+                NotificationManager.error("Could not create account. That email is already taken.");
+            } else {
+                NotificationManager.error("Something went wrong. Please try again.");
+            }
         });
 
     return {
@@ -52,7 +56,7 @@ export function signup(values, callback) {
     }
 }
 
-export function fetchTodoLists() {
+export function fetchTodoLists(callback) {
     const url = `${ROOT_URL}/todos`;
     const request = axios.get(url, {
         headers: {
@@ -61,7 +65,8 @@ export function fetchTodoLists() {
         }
     })
     .catch(function (error) {
-        console.log(error);
+        NotificationManager.error("Session expired. Please login again.");
+        callback();
     });
 
     return {
@@ -86,7 +91,7 @@ export function fetchSingleTodoList(id) {
         }
     })
     .catch(function (error) {
-        console.log(error);
+        NotificationManager.error("Something went wrong. Please try again.");
     });
 
     return {

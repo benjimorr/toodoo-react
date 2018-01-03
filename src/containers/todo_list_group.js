@@ -29,7 +29,10 @@ class TodoListGroup extends Component {
                 }
             })
             .then(function(response) {
-                props.fetchTodoLists();
+                props.fetchTodoLists(() => {
+                    this.props.history.push('/login');
+                });
+                props.fetchSingleTodoList(null);
                 NotificationManager.info(response.data.message);
             })
             .catch(function(err) {
