@@ -59,6 +59,13 @@ class TodoListGroup extends Component {
 
     render() {
         if(this.props.todoLists[0]) {
+            if(this.props.todoLists[0].length === 0) {
+                return (
+                    <ul className="list-group">
+                        <li className="list-group-item"><h4>No Lists</h4></li>
+                    </ul>
+                );
+            }
             return (
                 <ul className="list-group todo-lists-list">
                     {this.props.todoLists[0].map(item => this.renderTodoLists(item))}

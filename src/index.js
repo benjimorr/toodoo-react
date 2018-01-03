@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReduxPromise from 'redux-promise';
+import { NotificationContainer } from 'react-notifications';
 
 import reducers from './reducers';
 import Home from './containers/home';
@@ -15,6 +16,7 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
         <BrowserRouter>
             <div>
+                <NotificationContainer />
                 <Switch>
                     <Route path="/login" component={Authentication} />
                     <Route path="/" component={Home} />

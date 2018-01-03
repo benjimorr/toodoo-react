@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { NotificationManager } from 'react-notifications';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { login } from '../actions/index';
 
 const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
@@ -30,7 +31,9 @@ class Login extends Component {
 
     onSubmit(values) {
         //this === component
-        console.log(values);
+        this.props.login(values, () => {
+            this.props.history.push('/');
+        });
     }
 
     render() {
@@ -76,4 +79,6 @@ function validate(values) {
 export default reduxForm({
     validate,
     form: 'LoginForm'
-})(Login);
+})(
+    connect(null, { login })(Login)
+);

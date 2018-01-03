@@ -43,8 +43,8 @@ class Authentication extends Component {
                 </div>
 
                 <div className="login-signup-show">
-                    { this.state.loginOpened ? <Login /> : null }
-                    { this.state.signupOpened ? <Signup /> : null }
+                    { this.state.loginOpened ? <Login history={this.props.history} /> : null }
+                    { this.state.signupOpened ? <Signup history={this.props.history} /> : null }
                 </div>
             </div>
         );

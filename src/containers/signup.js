@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { NotificationManager } from 'react-notifications';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { signup } from '../actions/index';
 
 const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
@@ -30,7 +31,9 @@ class Signup extends Component {
 
     onSubmit(values) {
         //this === component
-        console.log(values);
+        this.props.signup(values, () => {
+            this.props.history.push('/');
+        });
     }
 
     render() {
@@ -87,6 +90,9 @@ function validate(values) {
     if(!values.passwordConfirmation || values.passwordConfirmation.length < 8) {
         errors.passwordConfirmation = "Password must be at least 8 characters.";
     }
+    if(values.password !== values.passwordConfirmation) {
+        errors.passwordConfirmation = "Passwords must be the same."
+    }
 
     return errors;
 }
@@ -94,4 +100,6 @@ function validate(values) {
 export default reduxForm({
     validate,
     form: 'SignupForm'
-})(Signup);
+})(
+    connect(null, { signup })(Signup)
+);

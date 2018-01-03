@@ -2,24 +2,34 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { NotificationContainer } from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 
-import { fetchTodoLists } from '../actions/index';
+import { fetchTodoLists, fetchSingleTodoList, cookies } from '../actions/index';
 import NewTodoList from './new_todo_list';
 import TodoListGroup from './todo_list_group';
 import ActiveTodo from './active_todo';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.endSession = this.endSession.bind(this);
+    }
+
     componentWillMount() {
         this.props.fetchTodoLists();
+    }
+
+    endSession() {
+        cookies.set('authToken', null);
+        this.props.fetchSingleTodoList(null);
+        NotificationManager.info("Logged out successfully.");
     }
 
     render() {
         return (
             <div className="app-container">
-                <NotificationContainer />
                 <div className="text-xs-right">
-                    <Link className="btn btn-primary" to="/login">
+                    <Link className="btn btn-primary" to="/login" onClick={this.endSession}>
                         Logout
                     </Link>
                 </div>
@@ -50,7 +60,7 @@ function mapStateToProps({ todoListGroup }) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ fetchTodoLists }, dispatch);
+    return bindActionCreators({ fetchTodoLists, fetchSingleTodoList }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
