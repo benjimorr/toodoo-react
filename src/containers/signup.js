@@ -1,92 +1,70 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
 import { NotificationManager } from 'react-notifications';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+const email = value =>
+    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+        'Invalid email address' : undefined;
+
 class Signup extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-            email: "",
-            password: "",
-            password_confirmation: ""
-        };
+    renderField(field) {
+        const { meta: { touched, error } } = field;
+        const className = `form-group ${touched && error ? 'has-warning' : ''}`
 
-        this.onNameChange = this.onNameChange.bind(this);
-        this.onEmailChange = this.onEmailChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
-        this.onPasswordConfChange = this.onPasswordConfChange.bind(this);
+        return (
+            <div className={className}>
+                <input
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    className="form-control"
+                    {...field.input}
+                />
+                <div className="help-block">
+                    {touched ? error : ''}
+                </div>
+            </div>
+        );
     }
 
-    onNameChange(event) {
-        this.setState({ name: event.target.value });
-    }
-
-    onEmailChange(event) {
-        this.setState({ email: event.target.value });
-    }
-
-    onPasswordChange(event) {
-        this.setState({ password: event.target.value });
-    }
-
-    onPasswordConfChange(event) {
-        this.setState({ password_confirmation: event.target.value });
+    onSubmit(values) {
+        //this === component
+        console.log(values);
     }
 
     render() {
+        const { handleSubmit } = this.props;
+
         return (
             <div className="signup-form-div">
                 <h3 className="login-header">Sign up</h3>
-                <form>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            placeholder="Name (min. 5 letters)"
-                            className="form-control"
-                            value={this.state.name}
-                            onChange={this.onNameChange}
-                            pattern="[A-Za-z\s]{5,50}"
-                            required
-                            title="Please enter at least 5 letters"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            className="form-control"
-                            value={this.state.email}
-                            onChange={this.onEmailChange}
-                            required
-                            title="Please enter a valid email address"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            placeholder="Password (min. 8 chars)"
-                            className="form-control"
-                            value={this.state.password}
-                            onChange={this.onPasswordChange}
-                            pattern="[A-Za-z\d]{8,}"
-                            required
-                            title="Passwords must be at least 8 characters (only letters and numbers)"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            placeholder="Confirm password"
-                            className="form-control"
-                            value={this.state.password_confirmation}
-                            onChange={this.onPasswordConfChange}
-                            pattern="[A-Za-z\d]{8,}"
-                            required
-                            title="Passwords must be at least 8 characters (only letters and numbers)"
-                        />
-                    </div>
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <Field
+                        name="name"
+                        type="text"
+                        placeholder="Name"
+                        component={this.renderField}
+                    />
+                    <Field
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        validate={email}
+                        component={this.renderField}
+                    />
+                    <Field
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        component={this.renderField}
+                    />
+                    <Field
+                        name="passwordConfirmation"
+                        type="password"
+                        placeholder="Password Confirmation"
+                        component={this.renderField}
+                    />
                     <button type="submit" className="btn btn-secondary signup-btn">Sign up</button>
                 </form>
             </div>
@@ -94,4 +72,26 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+function validate(values) {
+    const errors = {};
+
+    if(!values.name || values.name.length < 5 || values.name.length > 50) {
+        errors.name = "Name must be between 5 and 50 characters.";
+    }
+    if(!values.email) {
+        errors.email = "Please enter a valid email address.";
+    }
+    if(!values.password || values.password.length < 8) {
+        errors.password = "Password must be at least 8 characters.";
+    }
+    if(!values.passwordConfirmation || values.passwordConfirmation.length < 8) {
+        errors.passwordConfirmation = "Password must be at least 8 characters.";
+    }
+
+    return errors;
+}
+
+export default reduxForm({
+    validate,
+    form: 'SignupForm'
+})(Signup);

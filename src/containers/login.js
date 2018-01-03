@@ -1,56 +1,58 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
 import { NotificationManager } from 'react-notifications';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+const email = value =>
+    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+        'Invalid email address' : undefined;
+
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: ""
-        };
+    renderField(field) {
+        const { meta: { touched, error } } = field;
+        const className = `form-group ${touched && error ? 'has-warning' : ''}`
 
-        this.onEmailChange = this.onEmailChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
+        return (
+            <div className={className}>
+                <input
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    className="form-control"
+                    {...field.input}
+                />
+                <div className="help-block">
+                    {touched ? error : ''}
+                </div>
+            </div>
+        );
     }
 
-    onEmailChange(event) {
-        this.setState({ email: event.target.value });
-    }
-
-    onPasswordChange(event) {
-        this.setState({ password: event.target.value });
+    onSubmit(values) {
+        //this === component
+        console.log(values);
     }
 
     render() {
+        const { handleSubmit } = this.props;
+
         return (
             <div className="login-form-div">
                 <h3 className="login-header">Login</h3>
-                <form>
-                    <div className="form-group">
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            className="form-control"
-                            value={this.state.email}
-                            onChange={this.onEmailChange}
-                            required
-                            title="Please enter a valid email address"
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            className="form-control"
-                            value={this.state.password}
-                            onChange={this.onPasswordChange}
-                            pattern="[A-Za-z\d]{8,}"
-                            required
-                            title="Passwords must be at least 8 characters (only letters and numbers)"
-                        />
-                    </div>
+                <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <Field
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        validate={email}
+                        component={this.renderField}
+                    />
+                    <Field
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        component={this.renderField}
+                    />
                     <button type="submit" className="btn btn-secondary login-btn">Login</button>
                 </form>
             </div>
@@ -58,4 +60,20 @@ class Login extends Component {
     }
 }
 
-export default Login;
+function validate(values) {
+    const errors = {};
+
+    if(!values.email) {
+        errors.email = "Please enter a valid email address.";
+    }
+    if(!values.password || values.password.length < 8) {
+        errors.password = "Password must be at least 8 characters.";
+    }
+
+    return errors;
+}
+
+export default reduxForm({
+    validate,
+    form: 'LoginForm'
+})(Login);

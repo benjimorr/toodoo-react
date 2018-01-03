@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 
 import { fetchTodoLists } from '../actions/index';
@@ -17,6 +18,11 @@ class Home extends Component {
         return (
             <div className="app-container">
                 <NotificationContainer />
+                <div className="text-xs-right">
+                    <Link className="btn btn-primary" to="/login">
+                        Logout
+                    </Link>
+                </div>
                 <div className="col-md-4 side-bar">
                     <div className="col-md-10 toodoo-logo">
                         <h1 className="toodoo-logo-text">TooDoo</h1>
