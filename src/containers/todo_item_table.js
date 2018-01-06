@@ -52,7 +52,7 @@ class TodoItemTable extends Component {
     * @returns: Promise
     */
     deleteItem(id) {
-        let conf = confirm("Are you sure you want to delete this list?");
+        let conf = confirm("Are you sure you want to delete this item?");
         if(conf) {
             const props = this.props;
 
