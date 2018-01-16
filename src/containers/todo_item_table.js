@@ -80,23 +80,18 @@ class TodoItemTable extends Component {
         const name = itemData.name;
         const createdAt = moment(itemData.created_at).fromNow();
 
-        let complete = null;
-        if(itemData.complete) {
-            complete = <div>
-                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, false, e)} className="btn btn-primary"><i className="glyphicon glyphicon-repeat"></i></button>
-                        </div>
-        } else {
-            complete = <div>
-                            <button type="submit" onClick={(e) => this.completeOrUndoItem(id, true, e)} className="btn btn-success"><i className="glyphicon glyphicon-ok"></i></button>
-                        </div>
-        }
+        let complete = itemData.complete ? false : true;
+        let buttonClass = itemData.complete ? "btn btn-primary" : "btn btn-success";
+        let glyph = itemData.complete ? <i className="glyphicon glyphicon-repeat"></i> : <i className="glyphicon glyphicon-ok"></i>;
+
+        let action = <div><button type="submit" onClick={(e) => this.completeOrUndoItem(id, complete, e)} className={buttonClass}>{glyph}</button></div>
 
         return (
             <tr key={id}>
                 <td>{name}</td>
                 <td>{createdAt}</td>
                 <td>
-                    {complete}
+                    {action}
                 </td>
                 <td>
                     <div>

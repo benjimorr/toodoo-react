@@ -49,7 +49,7 @@ class Home extends Component {
                 </div>
                 <div className="col-md-8 main-view">
                     <div className="col-md-12 single-todo-list">
-                        <ActiveTodo history={this.props.history} />
+                        <ActiveTodo />
                     </div>
                 </div>
             </div>
